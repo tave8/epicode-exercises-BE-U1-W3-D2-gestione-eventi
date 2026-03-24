@@ -34,13 +34,24 @@ public class App {
         
         // eventiDAO.save(evento1);
 
+        // GET BY ID
+        // try {
+        //     System.out.println(
+        //             eventiDAO.getById(2)
+        //     );
+        // }
+        // catch(EventoIDNotFoundException ex) {
+        //     System.out.println(ex.getMessage());
+        // }
+
+        // DELETE
         try {
-            System.out.println(
-                    eventiDAO.getById(2)
-            );
+            long targetIdToRemove = 1;
+            eventiDAO.delete(targetIdToRemove);
+            System.out.println("Evento with ID " + targetIdToRemove + " deleted successfully.");
         }
         catch(EventoIDNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("ERROR: " + ex.getMessage());
         }
         
         

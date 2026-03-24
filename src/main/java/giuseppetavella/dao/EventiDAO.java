@@ -46,8 +46,23 @@ public class EventiDAO {
         return evento;
     }
     
-    //
-    // public void delete(long targetId) throws EventoIDNotFoundException {
-    //    
-    // }
+    public void delete(long targetId) throws EventoIDNotFoundException {
+        // first I find this entity instance from the db
+        // so i reuse the get by id method in this DAO class
+        Evento evento = this.getById(targetId);
+        
+        // instantiate transaction
+        EntityTransaction transaction = this.entityManager.getTransaction();
+        
+        // begin transaction
+        transaction.begin();
+        
+        // TODO: from when i find the object in DB, till when i edit it again,
+        // give the command "remove" this entity instance from the 
+        // hibernate persistence context
+        // TODO: what error does it throw?
+        this.entityManager.remove(evento);
+        
+        transaction.commit();
+    }
 }
