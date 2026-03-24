@@ -4,6 +4,7 @@ import giuseppetavella.dao.EventiDAO;
 import giuseppetavella.entities.Evento;
 import giuseppetavella.entities.TipoEvento;
 import giuseppetavella.exceptions.evento.EventoIDNotFoundException;
+import giuseppetavella.exceptions.evento.SaveEventoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -30,9 +31,16 @@ public class App {
                 LocalDate.now().plusYears(1),
                 TipoEvento.PRIVATO,
                 3
-        );       
+        );     
         
-        // eventiDAO.save(evento1);
+        // SAVE
+        // try {
+        //     eventiDAO.save(evento1);
+        //         System.out.println("Evento "+evento1+" added successfully.");
+        // }
+        // catch(SaveEventoException ex) {
+        //     System.out.println(ex.getMessage());
+        // }
 
         // GET BY ID
         // try {
@@ -45,15 +53,15 @@ public class App {
         // }
 
         // DELETE
-        try {
-            long targetIdToRemove = 1;
-            eventiDAO.delete(targetIdToRemove);
-            System.out.println("Evento with ID " + targetIdToRemove + " deleted successfully.");
-        }
-        catch(EventoIDNotFoundException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        }
-        
+        // try {
+        //     long targetIdToRemove = 2;
+        //     eventiDAO.delete(targetIdToRemove);
+        //     System.out.println("Evento with ID " + targetIdToRemove + " deleted successfully.");
+        // }
+        // catch(EventoIDNotFoundException ex) {
+        //     System.out.println("ERROR: " + ex.getMessage());
+        // }
+        //
         
         entityManager.close();
         entityManagerFactory.close();
