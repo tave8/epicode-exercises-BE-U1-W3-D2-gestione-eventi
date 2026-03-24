@@ -1,7 +1,9 @@
 package giuseppetavella.exceptions.evento;
 
+import giuseppetavella.entities.Evento;
+
 public class SaveEventoException extends RuntimeException {
-    public SaveEventoException(String message) {
-        super(message);
+    public SaveEventoException(Evento evento) {
+        super("Error while saving " + evento + ".");
     }
 }

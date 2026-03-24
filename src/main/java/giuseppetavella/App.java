@@ -29,18 +29,18 @@ public class App {
         Evento evento1 = new Evento(
                 "evento1", 
                 LocalDate.now().plusYears(1),
-                TipoEvento.PRIVATO,
+                TipoEvento.NON_PRESENTE_IN_DB,
                 3
         );     
         
         // SAVE
-        // try {
-        //     eventiDAO.save(evento1);
-        //         System.out.println("Evento "+evento1+" added successfully.");
-        // }
-        // catch(SaveEventoException ex) {
-        //     System.out.println(ex.getMessage());
-        // }
+        try {
+            eventiDAO.save(evento1);
+                System.out.println("Evento "+evento1+" added successfully.");
+        }
+        catch(SaveEventoException ex) {
+            System.out.println(ex.getMessage());
+        }
 
         // GET BY ID
         // try {

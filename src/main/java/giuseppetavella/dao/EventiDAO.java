@@ -29,12 +29,18 @@ public class EventiDAO {
         // 2. open new transaction
         transaction.begin();
         
-        // 3. save new event in hibernate persistance context
-        // TODO: how to know if there were errors?
-        entityManager.persist(nuovoEvento);
         
-        // 4. commit or rollback changes from persistance context, into db
-        transaction.commit();
+        try {
+            // 3. save new event in hibernate persistance context
+            // TODO: how to know if there were errors?
+            entityManager.persist(nuovoEvento);
+            
+            // 4. commit or rollback changes from persistance context, into db
+            transaction.commit();
+            
+        } catch (RuntimeException ex) {
+            throw new SaveEventoException(nuovoEvento);
+        }
         
     }
     
@@ -61,7 +67,7 @@ public class EventiDAO {
         // give the command "remove" this entity instance from the 
         // hibernate persistence context
         // TODO: what error does it throw?
-        this.entityManager.remove(evento);
+        entityManager.remove(evento);
         
         transaction.commit();
     }
