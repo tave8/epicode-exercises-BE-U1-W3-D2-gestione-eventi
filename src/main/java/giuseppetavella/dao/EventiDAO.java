@@ -6,9 +6,17 @@ import giuseppetavella.exceptions.evento.SaveEventoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.Optional;
+
 public class EventiDAO {
     
     private final EntityManager entityManager;
+    
+    // the class that this DAO class refers to 
+    // example: 
+    //      Events (DAO class) -- refers to --> Event (entity class)
+    private static final Class<Evento> entityClass = Evento.class; 
+    
     
     public EventiDAO(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -30,9 +38,14 @@ public class EventiDAO {
         
     }
     
-    // public Evento getById(long targetId) throws EventoIDNotFoundException {
-    //
-    // }
+    public Evento getById(long targetId) throws EventoIDNotFoundException {
+        Evento evento = entityManager.find(entityClass, targetId);
+        if(evento == null) {
+            throw new EventoIDNotFoundException(targetId);
+        }
+        return evento;
+    }
+    
     //
     // public void delete(long targetId) throws EventoIDNotFoundException {
     //    

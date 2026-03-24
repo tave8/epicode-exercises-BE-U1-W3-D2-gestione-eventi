@@ -3,6 +3,7 @@ package giuseppetavella;
 import giuseppetavella.dao.EventiDAO;
 import giuseppetavella.entities.Evento;
 import giuseppetavella.entities.TipoEvento;
+import giuseppetavella.exceptions.evento.EventoIDNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -31,8 +32,16 @@ public class App {
                 3
         );       
         
-        eventiDAO.save(evento1);
-        
+        // eventiDAO.save(evento1);
+
+        try {
+            System.out.println(
+                    eventiDAO.getById(2)
+            );
+        }
+        catch(EventoIDNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
         
         
         entityManager.close();

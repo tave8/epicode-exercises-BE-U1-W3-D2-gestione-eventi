@@ -90,4 +90,13 @@ public class Evento {
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "id=" + id +
+                ", titolo='" + titolo + '\'' +
+                ", tipoEvento=" + tipoEvento +
+                '}';
+    }
 }
