@@ -75,6 +75,7 @@ public class Evento {
         this.dataEvento = dataEvento;
     }
 
+    // TODO: validation logic in setters vs DB. how do they come together? 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }

@@ -29,23 +29,23 @@ public class App {
         Evento evento1 = new Evento(
                 "evento1", 
                 LocalDate.now().plusYears(1),
-                TipoEvento.NON_PRESENTE_IN_DB,
+                TipoEvento.PUBBLICO,
                 3
         );     
         
         // SAVE
-        try {
-            eventiDAO.save(evento1);
-                System.out.println("Evento "+evento1+" added successfully.");
-        }
-        catch(SaveEventoException ex) {
-            System.out.println(ex.getMessage());
-        }
+        // try {
+        //     eventiDAO.save(evento1);
+        //         System.out.println("Evento "+evento1+" added successfully.");
+        // }
+        // catch(SaveEventoException ex) {
+        //     System.out.println(ex.getMessage());
+        // }
 
         // GET BY ID
         // try {
         //     System.out.println(
-        //             eventiDAO.getById(2)
+        //             eventiDAO.getById(8)
         //     );
         // }
         // catch(EventoIDNotFoundException ex) {
@@ -54,7 +54,7 @@ public class App {
 
         // DELETE
         // try {
-        //     long targetIdToRemove = 2;
+        //     long targetIdToRemove = 8;
         //     eventiDAO.delete(targetIdToRemove);
         //     System.out.println("Evento with ID " + targetIdToRemove + " deleted successfully.");
         // }

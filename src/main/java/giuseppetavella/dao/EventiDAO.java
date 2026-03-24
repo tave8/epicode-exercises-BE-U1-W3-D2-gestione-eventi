@@ -1,7 +1,9 @@
 package giuseppetavella.dao;
 
 import giuseppetavella.entities.Evento;
+import giuseppetavella.exceptions.evento.DeleteEventoException;
 import giuseppetavella.exceptions.evento.EventoIDNotFoundException;
+import giuseppetavella.exceptions.evento.FindEventoException;
 import giuseppetavella.exceptions.evento.SaveEventoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -29,7 +31,6 @@ public class EventiDAO {
         // 2. open new transaction
         transaction.begin();
         
-        
         try {
             // 3. save new event in hibernate persistance context
             // TODO: how to know if there were errors?
@@ -39,36 +40,54 @@ public class EventiDAO {
             transaction.commit();
             
         } catch (RuntimeException ex) {
+            transaction.rollback();
             throw new SaveEventoException(nuovoEvento);
         }
         
     }
     
-    public Evento getById(long targetId) throws EventoIDNotFoundException {
-        Evento evento = entityManager.find(entityClass, targetId);
+    public Evento getById(long targetId) throws EventoIDNotFoundException, FindEventoException {
+        Evento evento;
+        
+        try {
+            evento = entityManager.find(entityClass, targetId);
+        } catch (RuntimeException ex) {
+            throw new FindEventoException(targetId);
+        }
+        
         if(evento == null) {
             throw new EventoIDNotFoundException(targetId);
         }
+        
         return evento;
     }
     
-    public void delete(long targetId) throws EventoIDNotFoundException {
+    public void delete(long targetId) throws EventoIDNotFoundException, FindEventoException, DeleteEventoException {
+        Evento evento;
+
         // first I find this entity instance from the db
         // so i reuse the get by id method in this DAO class
-        Evento evento = this.getById(targetId);
+        evento = getById(targetId);
         
         // instantiate transaction
-        EntityTransaction transaction = this.entityManager.getTransaction();
+        EntityTransaction transaction = entityManager.getTransaction();
         
         // begin transaction
         transaction.begin();
         
-        // TODO: from when i find the object in DB, till when i edit it again,
-        // give the command "remove" this entity instance from the 
-        // hibernate persistence context
-        // TODO: what error does it throw?
-        entityManager.remove(evento);
+        try {
+            // TODO: from when i find the object in DB, till when i edit it again,
+            // give the command "remove" this entity instance from the 
+            // hibernate persistence context
+            // TODO: what error does it throw?
+            entityManager.remove(evento);
+            
+            transaction.commit();
+            
+        } catch(RuntimeException ex) {
+            transaction.rollback();
+            throw new DeleteEventoException(targetId);
+        }
         
-        transaction.commit();
     }
 }
