@@ -33,7 +33,10 @@ public class Evento {
     private String descrizione;
     
     // mandatory. why?
-    public Evento() {}
+    // modo standard per hibernate per ricostruire oggetti
+    // costruttore standardizzato
+    // protected: why 
+    protected Evento() {}
     
     public Evento(String titolo, LocalDate dataEvento, TipoEvento tipoEvento, int numeroMassimoPartecipanti, String descrizione) {
         this.setTitolo(titolo);
@@ -76,6 +79,7 @@ public class Evento {
     }
 
     // TODO: validation logic in setters vs DB. how do they come together? 
+    //       ANSWER: must be in both
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }

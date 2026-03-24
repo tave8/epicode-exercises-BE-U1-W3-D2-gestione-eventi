@@ -24,14 +24,14 @@ public class App {
 
         EventiDAO eventiDAO = new EventiDAO(entityManager);
         
-        // TODO: in theory you could instantiate an entity with 0 arguments, because 
-        //      the constructor must have 0 parameters for hibernate?
         Evento evento1 = new Evento(
                 "evento1", 
                 LocalDate.now().plusYears(1),
                 TipoEvento.PUBBLICO,
                 3
         );     
+        
+        // Evento evento2 = new Evento();
         
         // SAVE
         // try {
@@ -45,7 +45,7 @@ public class App {
         // GET BY ID
         // try {
         //     System.out.println(
-        //             eventiDAO.getById(8)
+        //             eventiDAO.getById(9)
         //     );
         // }
         // catch(EventoIDNotFoundException ex) {
