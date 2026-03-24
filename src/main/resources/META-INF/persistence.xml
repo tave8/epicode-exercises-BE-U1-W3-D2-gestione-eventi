@@ -3,6 +3,7 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="gestione-eventi">
+        <class>giuseppetavella.entities.Evento</class>
         <properties>
             <!-- host             -->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/gestione-eventi"/>
