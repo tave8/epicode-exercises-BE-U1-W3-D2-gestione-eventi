@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class EventiDAO {
     
@@ -66,7 +67,20 @@ public class EventiDAO {
         // first I find this entity instance from the db
         // so i reuse the get by id method in this DAO class
         Evento evento = getById(targetId);
+
         
+        // System.out.println("countdown start");
+        //
+        // try {
+        //     TimeUnit.SECONDS.sleep(10);
+        //    
+        // } catch (InterruptedException ex) {
+        //     System.out.println(ex.getMessage());
+        // }
+        //
+        // System.out.println("countdown end");
+        //
+
         // instantiate transaction
         EntityTransaction transaction = entityManager.getTransaction();
         
@@ -85,6 +99,8 @@ public class EventiDAO {
             
         } catch(RuntimeException ex) {
             transaction.rollback();
+            // ex.printStackTrace();
+            
             throw new DeleteEventoException(targetId);
         }
         

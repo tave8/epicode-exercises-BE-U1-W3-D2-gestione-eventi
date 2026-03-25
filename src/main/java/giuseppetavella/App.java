@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.concurrent.TimeUnit;
 
 public class App {
 
@@ -29,7 +30,8 @@ public class App {
                 LocalDate.now().plusYears(1),
                 TipoEvento.PUBBLICO,
                 3
-        );     
+        );
+        
         
         // Evento evento2 = new Evento();
         
@@ -53,15 +55,15 @@ public class App {
         // }
 
         // DELETE
-        // try {
-        //     long targetIdToRemove = 8;
-        //     eventiDAO.delete(targetIdToRemove);
-        //     System.out.println("Evento with ID " + targetIdToRemove + " deleted successfully.");
-        // }
-        // catch(EventoIDNotFoundException ex) {
-        //     System.out.println("ERROR: " + ex.getMessage());
-        // }
-        //
+        try {
+            long targetIdToRemove = 11;
+            eventiDAO.delete(targetIdToRemove);
+            System.out.println("Evento with ID " + targetIdToRemove + " deleted successfully.");
+        }
+        catch(EventoIDNotFoundException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+
         
         entityManager.close();
         entityManagerFactory.close();
